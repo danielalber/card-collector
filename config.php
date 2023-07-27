@@ -1,0 +1,21 @@
+<?php
+
+$db_host="localhost"; 
+$db_user="root";	
+$db_password="";	
+$db_name="card_collector";	
+
+try
+{
+	$db=new PDO("mysql:host={$db_host};dbname={$db_name}",$db_user,$db_password);
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    var_dump($db);
+}
+catch(PDOEXCEPTION $e)
+{
+	$e->getMessage();
+    var_dump($e);
+}
+
+
+?>
