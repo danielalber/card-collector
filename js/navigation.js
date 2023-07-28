@@ -1,15 +1,19 @@
 function GoActualite() {
-    window.location = '/pages/actualites.html';
+    window.location = '/pages/actualites.php';
 }
 
 function GoCollection() {
-    window.location = '/pages/collection.html';
+    window.location = '/pages/collection.php';
 }
 
 function GoLogin() {
-    window.location = '/pages/authentification/login.html';
+    window.location = '/pages/authentification/login.php';
 }
 
 function GoRegister() {
-    window.location = '/pages/authentification/register.html';
+    window.location = '/pages/authentification/register.php';
+}
+
+function GoProfile() {
+    window.location = '/pages/profile.php'
 }

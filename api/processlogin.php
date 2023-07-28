@@ -22,6 +22,8 @@ if (isset($_POST["newusername"]) && isset($_POST["newpassword"])) {
 		}
 		session_start();
 		$_SESSION['user_id'] = $row[0]['IDUsers'];
+		$_SESSION['username'] = $row[0]['username'];
+		var_dump($_SESSION);
 		$resp['redirect'] = "collection.html";
 		$resp['status'] = true;
 		echo json_encode($resp);
@@ -33,5 +35,6 @@ if (isset($_POST["newusername"]) && isset($_POST["newpassword"])) {
 		echo json_encode($resp);
 		exit;
 	}
+
 }
 ?>
