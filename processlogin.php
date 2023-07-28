@@ -1,31 +1,38 @@
 <?php
-
 require_once "config.php";
-
+$error = array();
+$res = array();
+ 
 if(isset($_POST["newusername"]) && isset($_POST["newpassword"]))
 {	
-    echo "test";
 	$username = $_POST["newusername"];
 
 	$password = $_POST["newpassword"];
 	
 	$stmt=$db->prepare("SELECT `IDUsers`, `username`, `password` FROM `users` WHERE `username` = :uname"); 
-	
 		
-	$stmt->bindParam(":uname",$username, PDO::PARAM_STR);
-#	$stmt->bindParam(":upassword",$password, PDO::PARAM_STR);
-		 		
-	if($stmt->execute())
-	{
-		echo '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button> 
-					Register Successfully  
-			 </div>';		
-	}	
-	else
-	{
-		echo  '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button> 
-					Fail to Register  
-			   </div>';		
+	$stmt->execute(array(':uname' => $_POST['newusername']));
+	$row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	if (count($row) > 0) {
+		if (!password_verify($_POST['newpassword'], $row[0]['password'])) {
+			$error[] = "Password is not valid";
+			$resp['msg'] = $error;
+			$resp['status'] = false;
+			echo json_encode($resp);
+			exit;
+		}
+		session_start();
+		$_SESSION['user_id'] = $row[0]['IDUsers'];
+		$resp['redirect'] = "collection.html";
+		$resp['status'] = true;
+		echo json_encode($resp);
+		exit;
+	} else {
+		$error[] = "User does not match";
+		$resp['msg'] = $error;
+		$resp['status'] = false;
+		echo json_encode($resp);
+		exit;
 	}
 }
 ?>

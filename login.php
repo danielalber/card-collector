@@ -2,18 +2,16 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script>
 	
+
 	$(document).on('click','#btn_login',function(e){
 		console.log("hello");
 		e.preventDefault();
 			
 		var username = $('#txt_username').val();
 		var password = $('#txt_password').val();
-			
+		
 		if(username == ''){ // check username not empty
 			alert('please enter username !!'); 
-		}
-		else if(!/^[a-z A-Z]+$/.test(username)){ // check username allowed capital and small letters 
-			alert('username only capital and small letters are allowed !!'); 
 		}
 		else if(password == ''){ //check password not empty
 			alert('please enter password !!'); 
@@ -31,10 +29,10 @@
 				}
 			});
 				
-			$('#registraion_form')[0].reset();
+			$('#login_form')[0].reset();
 		}
 	});
-
+</script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +62,16 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a href="actualites.html" class="nav-link">Actualités </a></li>
           <li class="nav-item"><a href="collection.html" class="nav-link">Collection</a></li>
-          <li class="nav-item active"><a href="register.php" class="nav-link">Connexion <span class="sr-only">(current)</span></a></li>
+          <div class="btn-group">
+            <button type="button" class="btn btn-login nav-link">Mon compte</button>
+            <button type="button" class="btn btn-login dropdown-toggle dropdown-toggle-split nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="login.php">Connexion</a>
+            <a class="dropdown-item" href="register.php">Inscription</a>
+            <a class="dropdown-item" href="logout.php">Déconnection</a>
+          </div>
         </ul>
       </div>
     </div>

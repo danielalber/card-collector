@@ -10,6 +10,7 @@ if(isset($_POST["newusername"]) && isset($_POST["newemail"]) && isset($_POST["ne
 	$email = $_POST["newemail"];
 
 	$password = $_POST["newpassword"];
+	$password = password_hash($password, PASSWORD_DEFAULT);
 	
 	$stmt=$db->prepare("INSERT INTO users(username,
 											 email, 
